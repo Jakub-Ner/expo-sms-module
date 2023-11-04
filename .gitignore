@@ -6,6 +6,9 @@
 .vscode/
 jsconfig.json
 
+# Jetbrains
+.idea/
+
 # Xcode
 #
 build/
