@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "expo-sms-module",
+    "slug": "expo-sms-module",
+    "version": "0.0.1",
+    "description": "Expo module for reading SMS from android device",
+    "sdkVersion": "49.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "android": {
+      "package": "com.jakubner.exposmsmodule"
+    }
+  }
+}
