@@ -4,8 +4,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as ExpoSmsModule from 'expo-sms-module';
 
 export default function App() {
-//    requestSmsPermissions();
-//     sendSms('+48690585369', 'Hello from Expo');
+  console.log("App testing");
+  ExpoSmsModule.requestSendSmsPermissionsAsync().then((result) => {
+      console.log(result);
+      // ExpoSmsModule.sendSms('+12 345 678 999', 'Hello from Expo'); // uncomment and change phone number 
+  }).catch(
+    (error) => {
+      console.log(error);
+    }
+  )
+
   return (
     <View style={styles.container}>
       <Text>{ExpoSmsModule.hello()}</Text>
