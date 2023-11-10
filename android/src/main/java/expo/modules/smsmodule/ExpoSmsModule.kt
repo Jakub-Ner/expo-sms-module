@@ -1,6 +1,8 @@
 package expo.modules.smsmodule
 
 import android.Manifest
+import android.Manifest.permission.RECEIVE_SMS
+import android.Manifest.permission.READ_SMS
 import android.Manifest.permission.SEND_SMS
 import android.content.Context
 import expo.modules.kotlin.Promise
@@ -18,22 +20,22 @@ class ExpoSmsModule : Module() {
     override fun definition() = ModuleDefinition {
         Name(moduleName)
 
-        // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
         Function("hello") {
             "Hello siema lol! 👋"
         }
 
         AsyncFunction("requestSendSmsPermissionsAsync") { promise: Promise ->
-            Permissions.askForPermissionsWithPermissionsManager(appContext.permissions, promise, SEND_SMS)
+            Permissions.askForPermissionsWithPermissionsManager(appContext.permissions, promise, *listOfNotNull(RECEIVE_SMS, READ_SMS, SEND_SMS).toTypedArray())
           }
 
         Function("sendSms") { phoneNumber: String, message: String ->
             val smsManager = SmsManager.getDefault()
             try {
+                Log.d("ExpoSmsModule", "Sending SMS to $phoneNumber: $message")
                 smsManager.sendTextMessage(phoneNumber, null, message, null, null)
             }
             catch (e: Exception) {
-                Log.d("ExpoSmsModule", "dupa: $e")
+                Log.d("ExpoSmsModule", "Error during sendSMS(): $e")
             }
         }
 
